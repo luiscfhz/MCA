@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Un ramo para ti</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>💐</text></svg>">
+<style>
+:root{--bg:#fff4f0;--bg2:#ffdce7;--ink:#5a2a3a;--card:#fffffff0;--stem:#4f9a5a;--accent:#d6336c;--paper:#f6c6d4;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d1220;--bg2:#2e1a33;--ink:#fbe4ec;--card:#2b1b30f0;--stem:#6fc27c;--accent:#ff7aa8;--paper:#7a4560}}
+:root[data-theme="dark"]{--bg:#1d1220;--bg2:#2e1a33;--ink:#fbe4ec;--card:#2b1b30f0;--stem:#6fc27c;--accent:#ff7aa8;--paper:#7a4560}
+*{box-sizing:border-box}
+html{min-height:100%}
+body{margin:0;min-height:100vh;background:linear-gradient(160deg,var(--bg),var(--bg2));color:var(--ink);font-family:Georgia,'Times New Roman',serif;text-align:center;overflow-x:hidden;position:relative}
+h1{font-size:clamp(1.6rem,6vw,2.6rem);margin:26px 16px 4px;font-weight:normal;position:relative}
+.sub{margin:0 16px;opacity:.75;font-style:italic;min-height:1.4em;position:relative}
+svg#b{display:block;width:min(96%,460px);height:auto;margin:6px auto 0;overflow:visible;position:relative}
+.fl{cursor:pointer;-webkit-tap-highlight-color:transparent}
+.stem{fill:none;stroke:var(--stem);stroke-width:4.5;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.4s ease var(--d)}
+.leaf,.fil{opacity:0;transition:opacity .9s ease 1.3s}.leaf{fill:var(--stem)}.fil{transition-delay:2.6s}
+.open .stem{stroke-dashoffset:0}.open .leaf{opacity:.92}.open .fil{opacity:1}
+.p{transform:rotate(var(--a)) scale(0);transition:transform 1.1s cubic-bezier(.2,1.4,.4,1) calc(var(--d) + 1.2s)}
+.open .p{transform:rotate(var(--a)) scale(1)}
+.c{transform:scale(0);transition:transform .8s ease calc(var(--d) + 1.9s)}.open .c{transform:scale(1)}
+.hd{fill:var(--accent);font-size:26px;opacity:0;transition:opacity .4s}.done .hd{opacity:1}
+.wrap{opacity:0;transition:opacity 1s ease 1s}.open .wrap{opacity:1}
+.sway{transform-origin:200px 420px;animation:sw 7s ease-in-out infinite}
+@keyframes sw{50%{transform:rotate(1.3deg)}}
+.tw{animation:tw 3s ease-in-out infinite;fill:var(--accent)}
+@keyframes tw{0%,100%{opacity:0}50%{opacity:.9}}
+.pet{position:fixed;top:-24px;width:10px;height:14px;border-radius:80% 0 80% 0;background:var(--accent);opacity:.4;pointer-events:none;animation:fall linear infinite;z-index:0}
+@keyframes fall{50%{margin-left:34px}to{transform:translateY(112vh) rotate(420deg)}}
+.hint{margin:4px 16px 0;font-size:.95rem;opacity:.75;position:relative}
+.song{display:inline-block;margin:12px 0 150px;padding:10px 22px;border-radius:24px;background:var(--accent);color:#fff;text-decoration:none;position:relative}
+#card{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,170%);width:min(92%,440px);background:var(--card);border:1px solid var(--accent);border-radius:18px;padding:20px 22px;box-shadow:0 10px 30px #0003;backdrop-filter:blur(8px);transition:transform .5s cubic-bezier(.2,1.2,.4,1);font-size:1.1rem;line-height:1.5;z-index:5}
+#card.show{transform:translate(-50%,0)}
+button{margin:10px 4px 0;background:var(--accent);color:#fff;border:0;border-radius:20px;padding:9px 22px;font:inherit;cursor:pointer}
+.heart{position:fixed;pointer-events:none;color:var(--accent);bottom:10vh;z-index:9;transition:transform 3s ease-out,opacity 3s}
+@media (prefers-reduced-motion:reduce){.p,.stem,.c,.leaf,.wrap,.fil{transition:none}.sway,.pet,.tw{animation:none}}
+</style>
+</head>
+<body>
+<h1 id="t"></h1>
+<p class="sub" id="s"></p>
+<svg id="b" viewBox="0 0 400 520" aria-label="Ramo de lirios y gerberas"></svg>
+<p class="hint" id="h"></p>
+<a class="song" id="song" target="_blank" rel="noopener">Para ti mi flakita❤️‍🔥</a>
+<div id="card" role="dialog"><div id="m"></div><div id="bt"></div></div>
+<script>
+//XD
+var NOMBRE="Maricela";
+var FIRMA="Tuyo, hasta que la distancia sea cero";
+var PLAYLIST_URL="https://open.spotify.com/playlist/1xtYF32KmjJdpbq4hnCiV0";
+var MENSAJES=[
+"Llegaste en el momento menos esperado, pero yo siempre te e estado esperando flaka",
+"Hoy estamos a miles de kilometros pero en un futuro tu y yo estaremos tan cerca que podremos abrazarnos y esperare lo que sea necesario.",
+"Eres la mejor conexión que he hecho en línea. Cero latencia en lo que siento por ti.",
+"Algún día estas flores serán de verdad y te las daré en persona. Mientras tanto este diminuto detalle es para ti",
+"Contigo hasta lo más cotidiano se vuelve especial.",
+"Gracias por esperar, por escucharme y por quedarte.",
+"Quiero que lo nuestro dure por siempre y are lo posible para que haci sea.",
+"Cuando pienso en ti, la distancia se siente mucho más corta."
+];
+var PREGUNTA="¿Quieres seguir escribiendo esta historia conmigo?";
+var OPCIONES=["Sí","Obvio que sí"];
+var FINAL="Entonces trato hecho. Este ramo nunca se marchita, y un día será de verdad. 💐";
+/* tipo, x, y, escala, [color punta, color base] */
+var FLORES=[
+ ["gerbera",200,92,.72,["#ff5c8a","#ffa6c0"]],
+ ["lirio",125,128,.7,["#ffffff","#ffb3cc"]],
+ ["gerbera",275,128,.7,["#ff8a1f","#ffd08a"]],
+ ["lirio",84,198,.68,["#ffe6f0","#ff8fb8"]],
+ ["gerbera",316,198,.68,["#d81b60","#ff8fb0"]],
+ ["lirio",200,176,.74,["#fff8dc","#ffae3d"]],
+ ["gerbera",140,244,.68,["#ffb300","#fff0a0"]],
+ ["lirio",260,244,.68,["#ffffff","#f7a8c8"]]
+];
+var seed=7;function r(){seed=(seed*9301+49297)%233280;return seed/233280}
+function cabeza(t,col,d,i){
+  var s="";
+  if(t=="gerbera"){
+    [[22,-50,7,28,0,0],[18,-39,6.5,23,10,.25],[14,-28,6,18,0,.5]].forEach(function(L){
+      for(var k=0;k<L[0];k++)s+='<ellipse class="p" style="--a:'+(k*360/L[0]+L[4])+'deg;--d:'+(d+L[5]+k*.015)+'s" cy="'+L[1]+'" rx="'+L[2]+'" ry="'+L[3]+'" fill="url(#pg'+i+')"/>';
+    });
+    s+='<g class="c" style="--d:'+d+'s"><circle r="17" fill="url(#cg)"/>';
+    for(var a=0;a<14;a++)s+='<circle cx="'+(Math.cos(a*.449)*11).toFixed(1)+'" cy="'+(Math.sin(a*.449)*11).toFixed(1)+'" r="1.7" fill="#f2c14e"/>';
+    for(var b=0;b<7;b++)s+='<circle cx="'+(Math.cos(b*.897)*5.5).toFixed(1)+'" cy="'+(Math.sin(b*.897)*5.5).toFixed(1)+'" r="1.4" fill="#e8a33a"/>';
+    s+='<circle cx="-5" cy="-6" r="2.4" fill="#fff" opacity=".3"/></g>';
+  }else{
+    for(var k=0;k<6;k++){
+      var sp="";for(var q=0;q<5;q++)sp+='<circle cx="'+((r()-.5)*11).toFixed(1)+'" cy="'+(-10-r()*24).toFixed(1)+'" r="1.1" fill="#b8326e" opacity=".55"/>';
+      s+='<g class="p" style="--a:'+(k*60+(k%2?30:0))+'deg;--d:'+(d+k*.05)+'s"><path d="M0 0C17-18 18-50 0-78C-18-50-17-18 0 0Z" fill="url(#pg'+i+')" stroke="'+col[1]+'" stroke-width="1.5"/><path d="M0-4C1.5-26 1.5-48 0-68" fill="none" stroke="'+col[1]+'" stroke-width="1.4" opacity=".7"/>'+(k%2?"":sp)+'</g>';
+    }
+    for(var m=0;m<6;m++)s+='<g class="p" style="--a:'+(m*60+14)+'deg;--d:'+(d+.5)+'s"><path d="M0 0Q3-18 0-34" fill="none" stroke="#c98a3a" stroke-width="1.8"/><ellipse cx="0" cy="-36" rx="3.2" ry="7" fill="#d9731a"/></g>';
+    s+='<g class="c" style="--d:'+d+'s"><path d="M0 0Q-2-22 0-44" fill="none" stroke="#8aa05a" stroke-width="2.6"/><circle cy="-45" r="3.8" fill="#9db86a"/><circle cx="-3" cy="-47" r="1.6" fill="#7e9448"/><circle cx="3" cy="-47" r="1.6" fill="#7e9448"/></g>';
+  }
+  return s;
+}
+var svg=document.getElementById("b"),h="<defs><radialGradient id=\"cg\"><stop offset=\"0\" stop-color=\"#8a5528\"/><stop offset=\"1\" stop-color=\"#34200f\"/></radialGradient><radialGradient id=\"gl\"><stop offset=\"0\" stop-color=\"#ff9ec1\" stop-opacity=\".4\"/><stop offset=\"1\" stop-color=\"#ff9ec1\" stop-opacity=\"0\"/></radialGradient>";
+FLORES.forEach(function(f,i){
+  h+=f[0]=="gerbera"?'<linearGradient id="pg'+i+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+f[4][1]+'"/><stop offset="1" stop-color="'+f[4][0]+'"/></linearGradient>':'<linearGradient id="pg'+i+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+f[4][0]+'"/><stop offset=".6" stop-color="'+f[4][0]+'"/><stop offset="1" stop-color="'+f[4][1]+'"/></linearGradient>';
+});
+h+='</defs><ellipse cx="200" cy="240" rx="240" ry="260" fill="url(#gl)"/><g class="sway">';
+var sc=function(x,y,n,w,dy){var t="M"+x+" "+y;for(var i=0;i<n;i++)t+="q"+(w/2)+" "+dy+" "+w+" 0";return t};
+h+='<g class="wrap"><path d="'+sc(34,258,8,41,-24)+'L216 424L184 424Z" fill="var(--paper)" opacity=".6" stroke="var(--accent)" stroke-width="1.5" stroke-linejoin="round"/></g>';
+//Dest
+for(var z=0;z<9;z++)h+='<text class="tw" style="animation-delay:'+(z*.7)+'s" x="'+(20+r()*360).toFixed(0)+'" y="'+(20+r()*330).toFixed(0)+'" font-size="'+(10+r()*10).toFixed(0)+'">✦</text>';
+//Gripsfl
+var gs="";
+for(var g=0;g<9;g++){
+  var an=(-52+g*13)*Math.PI/180,len=215+r()*60,ex=200+Math.sin(an)*len,ey=404-Math.cos(an)*len;
+  gs+='<path d="M200 404Q'+((200+ex)/2+(r()-.5)*30).toFixed(0)+' '+((404+ey)/2).toFixed(0)+' '+ex.toFixed(0)+' '+ey.toFixed(0)+'" fill="none" stroke="var(--stem)" stroke-width="1.6" opacity=".8"/>';
+  for(var k=0;k<8;k++)gs+='<circle cx="'+(ex+(r()-.5)*30).toFixed(1)+'" cy="'+(ey+(r()-.5)*30).toFixed(1)+'" r="'+(2+r()*1.6).toFixed(1)+'" fill="#fff" stroke="#e7c3d0" stroke-width=".6"/>';
+}
+h+='<g class="fil">'+gs+'</g>';
+//Hojas
+[-66,-50,-34,34,50,66].forEach(function(a){h+='<g class="leaf" transform="rotate('+a+' 200 404)"><path d="M200 404C178 340 176 250 200 180C224 250 222 340 200 404Z"/><path d="M200 398V192" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="1.2"/></g>'});
+//Tallos
+FLORES.forEach(function(f,i){
+  var mx=(200+f[1])/2+(f[1]<200?-12:12),my=(404+f[2])/2,x0=200+(i-3.5)*4;
+  h+='<path class="stem" pathLength="1" style="--d:'+(i*.12)+'s" d="M'+x0+' 512L200 404Q'+mx+' '+my+' '+f[1]+' '+(f[2]+8)+'"/>';
+});
+//Cabez
+FLORES.forEach(function(f,i){
+  h+='<g class="fl" data-i="'+i+'" transform="translate('+f[1]+','+f[2]+') rotate('+((f[1]-200)*.12).toFixed(1)+') scale('+f[3]+')"><g>'+cabeza(f[0],f[4],i*.12,i)+'</g><text class="hd" text-anchor="middle" y="-62">♥</text><circle r="70" fill="transparent"/></g>';
+});
+h+='</g>';
+//Pap, moño
+h+='<g class="wrap"><path d="'+sc(44,322,7,44,-14)+'L214 428L186 428Z" fill="var(--paper)" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/><path d="M44 322L200 322L200 428L186 428Z" fill="#fff" opacity=".2"/><path d="M96 326L196 426M150 330L198 426M250 330L202 426M304 326L204 426" stroke="var(--accent)" stroke-opacity=".3" stroke-width="1.6"/><text x="104" y="360" fill="var(--accent)" opacity=".4" font-size="14">♥</text><text x="276" y="362" fill="var(--accent)" opacity=".4" font-size="12">♥</text><text x="192" y="396" fill="var(--accent)" opacity=".4" font-size="12">♥</text><path d="M200 434Q176 470 164 500M200 434Q224 470 236 500" fill="none" stroke="var(--accent)" stroke-width="9" stroke-linecap="round"/><ellipse cx="172" cy="428" rx="28" ry="14" fill="var(--accent)" transform="rotate(-20 172 428)"/><ellipse cx="228" cy="428" rx="28" ry="14" fill="var(--accent)" transform="rotate(20 228 428)"/><ellipse cx="168" cy="424" rx="14" ry="3.5" fill="#fff" opacity=".35" transform="rotate(-20 168 424)"/><ellipse cx="232" cy="424" rx="14" ry="3.5" fill="#fff" opacity=".35" transform="rotate(20 232 424)"/><circle cx="200" cy="431" r="10" fill="var(--accent)" stroke="var(--paper)" stroke-width="2"/></g>';
+svg.innerHTML=h;
+//P que caen
+for(var p=0;p<12;p++){var e=document.createElement("div");e.className="pet";e.style.left=(r()*96)+"vw";e.style.animationDuration=(10+r()*8)+"s";e.style.animationDelay=(-r()*14)+"s";document.body.appendChild(e)}
+document.getElementById("t").textContent="Para ti, "+NOMBRE;
+var vistos={},n=0,total=FLORES.length,hint=document.getElementById("h"),song=document.getElementById("song");
+hint.textContent="Toca cada flor ✿ (0 de "+total+")";
+if(PLAYLIST_URL)song.href=PLAYLIST_URL;else song.style.display="none";
+setTimeout(function(){svg.classList.add("open")},300);
+setTimeout(function(){document.getElementById("s").textContent="Un ramo que nunca se marchita"},2400);
+var card=document.getElementById("card"),m=document.getElementById("m"),bt=document.getElementById("bt"),fin=false;
+function corazones(k){for(var i=0;i<k;i++){(function(i){setTimeout(function(){var e=document.createElement("div");e.className="heart";e.textContent="♥";e.style.left=(5+Math.random()*90)+"vw";e.style.fontSize=(14+Math.random()*24)+"px";document.body.appendChild(e);requestAnimationFrame(function(){e.style.transform="translateY(-72vh)";e.style.opacity="0"});setTimeout(function(){e.remove()},3100)},i*110)})(i)}}
+function cerrar(){card.classList.remove("show");if(n==total&&!fin){fin=true;setTimeout(pregunta,500)}}
+function boton(t,fn){var b=document.createElement("button");b.textContent=t;b.onclick=fn;bt.appendChild(b)}
+function abrir(g){
+  if(fin)return;
+  var i=+g.dataset.i;
+  if(!vistos[i]){vistos[i]=1;n++;g.classList.add("done")}
+  hint.textContent="Toca cada flor ✿ ("+n+" de "+total+")";
+  m.textContent=MENSAJES[i];bt.innerHTML="";boton(n==total?"Continuar":"Cerrar",cerrar);
+  card.classList.add("show");corazones(8);
+}
+Array.prototype.forEach.call(svg.querySelectorAll(".fl"),function(g){g.addEventListener("click",function(){abrir(g)})});
+function pregunta(){
+  m.textContent=PREGUNTA;bt.innerHTML="";
+  OPCIONES.forEach(function(t){boton(t,function(){
+    m.innerHTML="";m.appendChild(document.createTextNode(FINAL));
+    var f=document.createElement("em");f.style.display="block";f.style.marginTop="8px";f.textContent="— "+FIRMA;m.appendChild(f);
+    bt.innerHTML="";corazones(26);hint.textContent="Te quiero, "+NOMBRE+" ♥";
+  })});
+  card.classList.add("show");
+}
+</script>
+</body>
+</html>
